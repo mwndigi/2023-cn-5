@@ -1,0 +1,55 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Response time for Node.js servers</title>
+</head>
+
+<body>
+    <h1>Response time for Node.js servers</h1>
+    <p>This module creates a middleware that records the response time for requests in HTTP servers and adds a
+        X-Response-Time header to responses.</p>
+    <p>"response time" is defined here as the elapsed time from when a request enters this middleware to when the
+        headers are written out to the client.</p>
+    <p>npm install response-time (<a href="https://www.npmjs.com/package/response-time" target="_blank">link</a>).</p>
+    <img src="/image" alt="Image">
+    <br />
+    <p>The X-Response-Time header value will be displayed here:</p>
+    <p id="responseTimeValue"></p>
+    <p>Cache-Control header is set to prevent caching.</p>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Create a new <p> element
+            const paragraph = document.createElement('p');
+
+            // Set the text content of the <p> element
+            paragraph.textContent = 'This <p> element was added asynchronously after the page load.';
+
+            // Append the <p> element to the body
+            document.body.appendChild(paragraph);
+            const responseTimeParagraph = document.getElementById('responseTimeValue');
+
+            // Send a GET request using the fetch API
+            fetch('/', {
+                method: 'GET',
+                headers: {
+                    'Cache-Control': 'no-cache',
+                },
+            })
+                .then((response) => {
+                    // Get the value of the X-Response-Time header
+                    const responseTimeHeader = response.headers.get('X-Response-Time');
+
+                    // Display the header value in the paragraph
+                    responseTimeParagraph.textContent = `X-Response-Time: ${responseTimeHeader}`;
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        });
+        
+    </script>
+</body>
+
+</html>
