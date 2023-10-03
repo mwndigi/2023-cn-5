@@ -1,1 +1,1 @@
-# 2023-cn-5
+# Pinger for responstid og Socket-programmering
